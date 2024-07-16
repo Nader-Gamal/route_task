@@ -1,0 +1,48 @@
+<div class="row w-100">
+  <div class="col-lg-12">
+    <select (change)="filterCustomers($event)">
+      <option value="">All Customers</option>
+      <option *ngFor="let customer of customers" [value]="customer.name">
+        {{ customer.name }}
+      </option>
+    </select>
+    <select class="mx-3" (change)="filterByTransactions($event)">
+      <option value="">All Transactions</option>
+      <option
+        *ngFor="let customer of customers"
+        [value]="customer.transactions"
+      >
+        {{ customer.transactions | currency }}
+      </option>
+    </select>
+  </div>
+
+  <div class="col-lg-12">
+    <h2 class="m-4">Customers</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Transactions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let customer of filteredCustomers"
+          (click)="selectCustomer(customer)"
+        >
+          <td>{{ customer.id }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.transactions | currency }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row w-100">
+  <div class="col-lg-12">
+    <h2 class="m-4">Transaction Chart</h2>
+    <canvas id="transactionChart"></canvas>
+  </div>
+</div>
